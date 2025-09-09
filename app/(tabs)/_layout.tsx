@@ -1,30 +1,20 @@
 import { Tabs } from "expo-router";
+import { House } from "lucide-react-native";
 import React from "react";
 import { Dimensions, Platform } from "react-native";
 
-import { HapticTab } from "@/components/HapticTab";
-import { IconSymbol } from "@/components/ui/IconSymbol";
-import TabBarBackground from "@/components/ui/TabBarBackground";
-import { Colors } from "@/constants/Colors";
-import { useColorScheme } from "@/hooks/useColorScheme";
-
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
   const isSideBar =
     ["web", "windows"].includes(Platform.OS) &&
     Dimensions.get("window").width > 768;
 
-  console.log(Platform.OS);
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
         headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarActiveBackgroundColor: Colors[colorScheme ?? "light"].tint,
         tabBarPosition: isSideBar ? "left" : "bottom",
-        tabBarBackground: TabBarBackground,
+        tabBarActiveTintColor: "#000",
         tabBarStyle: Platform.select({
           ios: {
             // Use a transparent background on iOS to show the blur effect
@@ -37,19 +27,15 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          // title: "Home",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="house.fill" color={color} />
-          ),
+          title: "Home",
+          tabBarIcon: ({ color }) => <House className="text-typography-950 size-24" />,
         }}
       />
       <Tabs.Screen
         name="explore"
         options={{
           title: "Explore",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="paperplane.fill" color={color} />
-          ),
+          tabBarIcon: ({ color }) => <House />,
         }}
       />
     </Tabs>
